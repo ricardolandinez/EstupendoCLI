@@ -37,7 +37,8 @@ const sendXml = async (options) => {
         })
         output.push(data)
    }
-   fs.appendFile(path.join(__dirname, "Output_xml.json"), JSON.stringify(output,null,4), () => { })
+   const ruta = path.join(process.cwd(),"Output_xml.json")
+   fs.appendFile(ruta, JSON.stringify(output,null,4), () => { })
 }
 
 // envios automaticos TXT

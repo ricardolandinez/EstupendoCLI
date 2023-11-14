@@ -1,7 +1,8 @@
 {
-  "name": "cli_api_xml",
+  "name": "@ricardolandinez/nomeolviden",
+  "private": false,
   "version": "1.0.0",
-  "description": "",
+  "description": "mejores implementadores 2021-2023",
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -11,9 +12,17 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "ElMejorImplementador",
   "license": "ISC",
   "dependencies": {
     "commander": "^11.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ricardolandinez/EstupendoCLI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ricardolandinez/EstupendoCLI/issues"
+  },
+  "homepage": "https://github.com/ricardolandinez/EstupendoCLI#readme"
 }
