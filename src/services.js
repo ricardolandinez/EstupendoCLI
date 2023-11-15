@@ -17,18 +17,18 @@ const sendXml = async (options) => {
     const xmls = archivos.filter(archivo => pattern.test(archivo))
     let urlApi = "https://pruebas.estupendo.com.co/api/documento"
     let identificacion = "";
-    if(options.prod){
+    if (options.prod) {
         urlApi = "https://app.estupendo.com.co/api/documento"
     }
-    if(options.nit){
-         identificacion = options.nit
+    if (options.nit) {
+        identificacion = options.nit
     }
     const output = []
-   for(let archivo of xmls) {
-    const name = path.join(options.directory, archivo)
-    const content = fs.readFileSync(name, { encoding: "utf-8" })
+    for (let archivo of xmls) {
+        const name = path.join(options.directory, archivo)
+        const content = fs.readFileSync(name, { encoding: "utf-8" })
         const encoded = Buffer.from(content).toString("base64")
-        const data = await request(urlApi,{
+        const data = await request(urlApi, {
             api_key: "",
             nit: identificacion, // enviar nit de la empresa que deseo recorrer
             prefijo: "",
@@ -36,9 +36,9 @@ const sendXml = async (options) => {
             xml: encoded
         })
         output.push(data)
-   }
-   const ruta = path.join(process.cwd(),"Output_xml.json")
-   fs.appendFile(ruta, JSON.stringify(output,null,4), () => { })
+    }
+    const ruta = path.join(process.cwd(), "Output_xml.json")
+    fs.appendFile(ruta, JSON.stringify(output, null, 4), () => { })
 }
 
 // envios automaticos TXT
@@ -59,12 +59,14 @@ const sendTxt = async (options) => {
         const name = path.join(options.directory, archivo)
         const content = fs.readFileSync(name, { encoding: "utf-8" })
         const encoded = Buffer.from(content).toString("base64")
-        const data = await request (urlApi, {
+        const data = await request(urlApi, {
             txtEncode: encoded
         })
         output.push(data)
     }
-    fs.appendFile(path.join(__dirname, "Output_txt.json"), JSON.stringify(output, null,4), () => { })
+    const ruta = path.join(process.cwd(), "Output_txt.json")
+    fs.appendFile(ruta, JSON.stringify(output, null, 4), () => { })
+
 }
 
 
