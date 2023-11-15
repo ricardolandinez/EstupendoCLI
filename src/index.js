@@ -3,7 +3,7 @@ import { program } from "commander"
 import { sendTxt, sendXml } from "./services.js"
 
 
-program.name("estupendo").version("1.0.0")
+program.name("estupendo").version("1.0.4")
 
 program.command("send_xml")
     .requiredOption("-d, --directory <char>", "Directorio donde se encuentran los documentos XML")
