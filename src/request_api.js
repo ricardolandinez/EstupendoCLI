@@ -9,4 +9,16 @@ const request = async (url, body) => {
     const data =  await res.json()
     return data
 }
-export { request }
+
+const requestFile = async (url, body) => {
+    const res = await fetch(url, {
+        method: "POST",
+        body: "",
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    })
+    const data =  await res.json()
+    return data
+}
+export { request, requestFile }

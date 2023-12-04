@@ -1,7 +1,7 @@
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
-import { request } from "./request_api.js"
+import { request, requestFile } from "./request_api.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -69,7 +69,27 @@ const sendTxt = async (options) => {
 
 }
 
+// cargue masivo Attached
 
+const sendAttached =async (options) => {
+    if (!fs.existsSync(options.directory)){
+        console.error("La carpeta no existe")
+    }
+    const archivos = fs.readdirSync(options.directory)
+    const pattern = /\.(zip|xml)$/i;
+    const attached = archivos.filter(archivo => pattern.test(archivo))
+    let urlApi = "https://pruebas.estupendo.com.co/api/race/documento/cargar"
+    if (options.prod) {
+        urlApi = "https://app.estupendo.com.co/api/race/documento/cargar"
+    }
+    const output = [];
+    for (let archivo of attached){
+     const name = path.join(options.directory, archivo)
+     const data = await requestFile(urlApi, {
 
+     })
+    }
 
-export { sendTxt, sendXml }
+} 
+
+export { sendTxt, sendXml, sendAttached }
