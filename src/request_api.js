@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const request = async (url, body) => {
     const res = await fetch(url, {
         method: "POST",
@@ -6,19 +8,16 @@ const request = async (url, body) => {
             "Content-Type": "application/json"
         }
     })
-    const data =  await res.json()
+    const data = await res.json()
     return data
 }
 
-const requestFile = async (url, body) => {
-    const res = await fetch(url, {
-        method: "POST",
-        body: "",
+const requestFile = async (url, fd) => {
+    const {data} = await axios.post(url, fd, {
         headers: {
             "Content-Type": "multipart/form-data"
         }
     })
-    const data =  await res.json()
     return data
 }
 export { request, requestFile }

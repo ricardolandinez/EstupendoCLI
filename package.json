@@ -15,7 +15,9 @@
   "author": "ElMejorImplementador",
   "license": "ISC",
   "dependencies": {
-    "commander": "^11.1.0"
+    "axios": "^1.6.2",
+    "commander": "^11.1.0",
+    "form-data": "^4.0.0"
   },
   "repository": {
     "type": "git",

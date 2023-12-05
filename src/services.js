@@ -1,5 +1,6 @@
 import fs from "fs"
 import path from "path"
+import FormData from "form-data"
 import { fileURLToPath } from "url"
 import { request, requestFile } from "./request_api.js"
 const __filename = fileURLToPath(import.meta.url)
@@ -24,6 +25,7 @@ const sendXml = async (options) => {
         identificacion = options.nit
     }
     const output = []
+    console.log("Procesando...")
     for (let archivo of xmls) {
         const name = path.join(options.directory, archivo)
         const content = fs.readFileSync(name, { encoding: "utf-8" })
@@ -55,6 +57,7 @@ const sendTxt = async (options) => {
         urlApi = "https://app.estupendo.com.co/api/cargarDocumentoTxt"
     }
     const output = [];
+    console.log("Procesando...")
     for (let archivo of txts) {
         const name = path.join(options.directory, archivo)
         const content = fs.readFileSync(name, { encoding: "utf-8" })
@@ -71,8 +74,8 @@ const sendTxt = async (options) => {
 
 // cargue masivo Attached
 
-const sendAttached =async (options) => {
-    if (!fs.existsSync(options.directory)){
+const sendAttached = async (options) => {
+    if (!fs.existsSync(options.directory)) {
         console.error("La carpeta no existe")
     }
     const archivos = fs.readdirSync(options.directory)
@@ -83,13 +86,19 @@ const sendAttached =async (options) => {
         urlApi = "https://app.estupendo.com.co/api/race/documento/cargar"
     }
     const output = [];
-    for (let archivo of attached){
-     const name = path.join(options.directory, archivo)
-     const data = await requestFile(urlApi, {
-
-     })
+    console.log("Procesando...")
+    for (let archivo of attached) {
+        const name = path.join(options.directory, archivo)
+        const fileStream = fs.createReadStream(name);
+        const fd = new FormData()
+        fd.append('file', fileStream, { filename: archivo });
+        const data = await requestFile(urlApi, fd)
+        output.push(data)
     }
+    const ruta = path.join(process.cwd(), "Output_attached.json")
+    fs.appendFile(ruta, JSON.stringify(output, null, 4), () => { })
 
-} 
+
+}
 
 export { sendTxt, sendXml, sendAttached }

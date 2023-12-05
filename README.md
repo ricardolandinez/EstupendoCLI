@@ -14,7 +14,7 @@ Para instalar el aplicativo CLI, deben realizar el siguiente procedimiento :
 ```npm i -g @ricardolandinez/nomeolviden```
 
 - Luego de esto deben validar la version de la herramienta :
-```estupendo --version```, si esta  indica que es la 1.0.7 es la correcta.
+```estupendo --version```, si esta  indica que es la 1.0.8 es la correcta.
 
 - Para conocer que opciones tienen de comandos solo deben ingresar en su CMD : 
 ```estupendo --help```
@@ -22,6 +22,7 @@ Para instalar el aplicativo CLI, deben realizar el siguiente procedimiento :
 ## Ejemplos de comando valido :
 - ```estupendo send_txt -d [Carpeta donde se encuentran los archivos txt]```
 - ```estupendo send_xml -d [Carpeta donde se encuentran los archivos xml] -n [Nit de la empresa que emite documentos]```
+- ```estupendo send_attached -d [Carpeta donde se encuentran los archivos xml] -p[Produccion, si no es enviado toma api pruebas]```
   
 Parametros :
 - -d = ruta de los documentos a leer en la maquina.
