@@ -95,6 +95,7 @@ const sendAttached = async (options) => {
         try {    
             console.log(name)
             const data = await requestFile(urlApi, fd)
+            output.push(`Nombre del archivo: ${name}`)
             output.push(data)
         } catch (error) {
             output.push(`El archivo ${name} no se pudo procesar`)
