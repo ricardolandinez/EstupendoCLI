@@ -92,8 +92,13 @@ const sendAttached = async (options) => {
         const fileStream = fs.createReadStream(name);
         const fd = new FormData()
         fd.append('file', fileStream, { filename: archivo });
-        const data = await requestFile(urlApi, fd)
-        output.push(data)
+        try {    
+            console.log(name)
+            const data = await requestFile(urlApi, fd)
+            output.push(data)
+        } catch (error) {
+            output.push(`El archivo ${name} no se pudo procesar`)
+        }
     }
     const ruta = path.join(process.cwd(), "Output_attached.json")
     fs.appendFile(ruta, JSON.stringify(output, null, 4), () => { })
