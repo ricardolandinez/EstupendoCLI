@@ -14,7 +14,7 @@ Para instalar el aplicativo CLI, deben realizar el siguiente procedimiento :
 ```npm i -g @ricardolandinez/nomeolviden```
 
 - Luego de esto deben validar la version de la herramienta :
-```estupendo --version```, si esta  indica que es la 1.1.0 es la correcta.
+```estupendo --version```, si esta  indica que es la 1.1.1 es la correcta.
 
 - Para conocer que opciones tienen de comandos solo deben ingresar en su CMD : 
 ```estupendo --help```
