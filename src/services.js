@@ -93,9 +93,10 @@ const sendAttached = async (options) => {
         const fd = new FormData()
         fd.append('file', fileStream, { filename: archivo });
         try {    
-            console.log(name)
+            const filename = name.split("\\").at(-1)
+            console.log(filename)
             const data = await requestFile(urlApi, fd)
-            output.push(`Nombre del archivo: ${name}`)
+            output.push(`Nombre del archivo: ${filename}`)
             output.push(data)
         } catch (error) {
             output.push(`El archivo ${name} no se pudo procesar`)
