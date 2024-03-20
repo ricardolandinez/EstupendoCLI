@@ -92,18 +92,26 @@ const sendAttached = async (options) => {
         const fileStream = fs.createReadStream(name);
         const fd = new FormData()
         fd.append('file', fileStream, { filename: archivo });
-        try {    
+        try {
             const filename = name.split("\\").at(-1)
-            console.log(filename)
+            console.log(`Procesando archivo: ${filename}`);
             const data = await requestFile(urlApi, fd)
             output.push(`Nombre del archivo: ${filename}`)
             output.push(data)
         } catch (error) {
-            output.push(`El archivo ${name} no se pudo procesar`)
+            const filename = name.split("\\").at(-1)
+            console.error(`Error al procesar el archivo ${name}:`, error); 
+            output.push(`El archivo ${filename} no se pudo procesar debido a: ${error.message}`);
         }
     }
     const ruta = path.join(process.cwd(), "Output_attached.json")
-    fs.appendFile(ruta, JSON.stringify(output, null, 4), () => { })
+    fs.appendFile(ruta, JSON.stringify(output, null, 4), (err) => {
+        if (err) {
+            console.error('Error al escribir en el archivo:', err);
+        } else {
+            console.log('Los resultados han sido guardados en Output_attached.json');
+        }
+    });
 
 
 }
